@@ -31,6 +31,9 @@
             <!-- Sección para mostrar los datos registrados -->
             <Label Text="Datos Registrados" FontSize="Medium" HorizontalOptions="Center" />
             <StackLayout x:Name="DatosRegistradosStack" Spacing="5" />
+
+            <!-- Botón para eliminar todos los registros -->
+            <Button Text="Eliminar Todos los Registros" BackgroundColor="Red" TextColor="White" Clicked="OnEliminarTodoClicked" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
