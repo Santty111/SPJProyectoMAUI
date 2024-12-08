@@ -5,24 +5,10 @@ namespace SPJProyectoMAUI;
 public partial class SPJVendedor : ContentPage
 {
     private string _imagePath; // Para guardar la ruta de la imagen
-    private SPJListaRegistros listaRegistrosPage;
 
     public SPJVendedor()
     {
         InitializeComponent();
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        // Navegar a la pestaña de la lista de registros
-        listaRegistrosPage = Application.Current.MainPage.FindByName<SPJListaRegistros>("SPJListaRegistros");
-    }
-
-    private void AgregarRegistroALista(VendedorYVehiculo registro)
-    {
-        listaRegistrosPage?.AgregarRegistro(registro);
     }
 
     private async void OnRegistrarVendedorClicked(object sender, EventArgs e)
@@ -48,12 +34,13 @@ public partial class SPJVendedor : ContentPage
             return;
         }
 
-        // Registrar datos (ejemplo: guardar en base de datos)
+        // Registrar datos
         bool registrado = RegistrarVendedorYVehiculo(nombre, correo, telefono, direccion, modelo, marca, año, precio, _imagePath);
 
         if (registrado)
         {
             await DisplayAlert("Éxito", "Vendedor y vehículo registrados exitosamente.", "OK");
+            MostrarDatosEnPantalla(nombre, correo, telefono, direccion, modelo, marca, año, precio);
             LimpiarCampos();
         }
         else
@@ -62,61 +49,91 @@ public partial class SPJVendedor : ContentPage
         }
     }
 
+    private bool RegistrarVendedorYVehiculo(string nombre, string correo, string telefono, string direccion,
+        string modelo, string marca, string año, string precio, string imagePath)
+    {
+        try
+        {
+            Console.WriteLine($"Nombre: {nombre}");
+            Console.WriteLine($"Correo: {correo}");
+            Console.WriteLine($"Teléfono: {telefono}");
+            Console.WriteLine($"Dirección: {direccion}");
+            Console.WriteLine($"Modelo: {modelo}");
+            Console.WriteLine($"Marca: {marca}");
+            Console.WriteLine($"Año: {año}");
+            Console.WriteLine($"Precio: {precio}");
+            Console.WriteLine($"Ruta Imagen: {imagePath}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al registrar: {ex.Message}");
+            return false;
+        }
+    }
+
+    private void MostrarDatosEnPantalla(string nombre, string correo, string telefono, string direccion,
+                                        string modelo, string marca, string año, string precio)
+    {
+        DatosRegistradosStack.Children.Clear();
+
+        var datosVendedor = new Label
+        {
+            Text = $"Nombre: {nombre}\nCorreo: {correo}\nTeléfono: {telefono}\nDirección: {direccion}",
+            FontSize = 14
+        };
+
+        var datosVehiculo = new Label
+        {
+            Text = $"Modelo: {modelo}\nMarca: {marca}\nAño: {año}\nPrecio: ${precio}",
+            FontSize = 14
+        };
+
+        DatosRegistradosStack.Children.Add(datosVendedor);
+        DatosRegistradosStack.Children.Add(datosVehiculo);
+
+        // Si hay una ruta de imagen válida, agregar la imagen
+        if (!string.IsNullOrWhiteSpace(_imagePath))
+        {
+            var imagenVehiculo = new Image
+            {
+                Source = ImageSource.FromFile(_imagePath),
+                HeightRequest = 200, // Ajusta el tamaño según tus necesidades
+                Aspect = Aspect.AspectFit
+            };
+
+            DatosRegistradosStack.Children.Add(imagenVehiculo);
+        }
+    }
+
+    private void LimpiarCampos()
+    {
+        NombreEntry.Text = string.Empty;
+        CorreoEntry.Text = string.Empty;
+        TelefonoEntry.Text = string.Empty;
+        DireccionEntry.Text = string.Empty;
+        ModeloEntry.Text = string.Empty;
+        MarcaEntry.Text = string.Empty;
+        AñoEntry.Text = string.Empty;
+        PrecioEntry.Text = string.Empty;
+        CarImage.Source = null;
+        _imagePath = null;
+    }
+
     private async void OnUploadImageClicked(object sender, EventArgs e)
     {
         try
         {
-            var result = await FilePicker.PickAsync(new PickOptions
-            {
-                PickerTitle = "Selecciona una imagen",
-                FileTypes = FilePickerFileType.Images
-            });
-
+            var result = await FilePicker.PickAsync();
             if (result != null)
             {
                 _imagePath = result.FullPath;
-                CarImage.Source = ImageSource.FromFile(_imagePath); // Mostrar la imagen seleccionada
+                CarImage.Source = ImageSource.FromFile(_imagePath);
             }
         }
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"No se pudo cargar la imagen: {ex.Message}", "OK");
         }
-    }
-
-    private bool RegistrarVendedorYVehiculo(string nombre, string correo, string telefono, string direccion,
-                                            string modelo, string marca, string año, string precio, string imagePath)
-    {
-        try
-        {
-            // Aquí podrías guardar en la base de datos o llamar a un servicio
-            Console.WriteLine($"Vendedor: {nombre}, {correo}, {telefono}, {direccion}");
-            Console.WriteLine($"Vehículo: {modelo}, {marca}, {año}, {precio}, Imagen: {imagePath}");
-            return true; // Suponemos éxito
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-            return false;
-        }
-    }
-
-    private void LimpiarCampos()
-    {
-        // Limpiar datos del vendedor
-        NombreEntry.Text = string.Empty;
-        CorreoEntry.Text = string.Empty;
-        TelefonoEntry.Text = string.Empty;
-        DireccionEntry.Text = string.Empty;
-
-        // Limpiar datos del vehículo
-        ModeloEntry.Text = string.Empty;
-        MarcaEntry.Text = string.Empty;
-        AñoEntry.Text = string.Empty;
-        PrecioEntry.Text = string.Empty;
-
-        // Limpiar imagen
-        CarImage.Source = null;
-        _imagePath = null;
     }
 }

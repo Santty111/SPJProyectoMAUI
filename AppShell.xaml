@@ -13,12 +13,5 @@
             Icon="home_icon.png"
             ContentTemplate="{DataTemplate local:SPJVendedor}"
             Route="SPJVendedor" />
-
-        <!-- Página de lista de registros -->
-        <ShellContent
-            Title="Lista de Registros"
-            Icon="list_icon.png"
-            ContentTemplate="{DataTemplate local:SPJListaRegistros}"
-            Route="SPJListaRegistros" />
     </TabBar>
 </Shell>

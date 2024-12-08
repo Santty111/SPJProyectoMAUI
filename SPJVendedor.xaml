@@ -27,6 +27,10 @@
 
             <!-- Botón para registrar -->
             <Button Text="Registrar Vendedor y Vehículo" Clicked="OnRegistrarVendedorClicked" />
+
+            <!-- Sección para mostrar los datos registrados -->
+            <Label Text="Datos Registrados" FontSize="Medium" HorizontalOptions="Center" />
+            <StackLayout x:Name="DatosRegistradosStack" Spacing="5" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
