@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SPJProyectoMAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SPJProyectoMAUI"
+    Title="SPJProyectoMAUI">
+
+    <!-- Define Tabs -->
+    <TabBar>
+        <!-- Página principal -->
+        <ShellContent
+            Title="Inicio"
+            Icon="home_icon.png" 
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+            <!-- Página de registro del vendedor -->
+            <ShellContent
+            Title="Registrar Vendedor"
+            Icon="vendedor_icon.png" 
+                ContentTemplate="{DataTemplate local:SPJVendedor}"
+            Route="SPJVendedor" />
+    </TabBar>
+</Shell>
