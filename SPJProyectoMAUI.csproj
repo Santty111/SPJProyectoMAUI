@@ -63,6 +63,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="SPJListaRegistros.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SPJVendedor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

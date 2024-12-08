@@ -6,20 +6,19 @@
     xmlns:local="clr-namespace:SPJProyectoMAUI"
     Title="SPJProyectoMAUI">
 
-    <!-- Define Tabs -->
     <TabBar>
-        <!-- Página principal -->
+        <!-- Página principal para el registro -->
         <ShellContent
-            Title="Inicio"
-            Icon="home_icon.png" 
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
-
-            <!-- Página de registro del vendedor -->
-            <ShellContent
-            Title="Registrar Vendedor"
-            Icon="vendedor_icon.png" 
-                ContentTemplate="{DataTemplate local:SPJVendedor}"
+            Title="Registrar"
+            Icon="home_icon.png"
+            ContentTemplate="{DataTemplate local:SPJVendedor}"
             Route="SPJVendedor" />
+
+        <!-- Página de lista de registros -->
+        <ShellContent
+            Title="Lista de Registros"
+            Icon="list_icon.png"
+            ContentTemplate="{DataTemplate local:SPJListaRegistros}"
+            Route="SPJListaRegistros" />
     </TabBar>
 </Shell>
