@@ -9,9 +9,16 @@
     <TabBar>
         <!-- Página principal para el registro -->
         <ShellContent
-            Title="Registrar"
+            Title="Vender"
             Icon="home_icon.png"
             ContentTemplate="{DataTemplate local:SPJVendedor}"
             Route="SPJVendedor" />
+
+        <!-- Página para el catálogo de vehículos -->
+        <ShellContent
+            Title="Comprar"
+            Icon="catalog_icon.png"
+            ContentTemplate="{DataTemplate local:SPJComprador}"
+            Route="SPJComprador" />
     </TabBar>
 </Shell>

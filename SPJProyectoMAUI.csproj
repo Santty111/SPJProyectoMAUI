@@ -57,12 +57,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\ford_mustang.jpeg" />
+	  <None Remove="Resources\Images\honda_civic.jpeg" />
+	  <None Remove="Resources\Images\onda.png" />
+	  <None Remove="Resources\Images\tesla_model_s.jpeg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="SPJComprador.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SPJVendedor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

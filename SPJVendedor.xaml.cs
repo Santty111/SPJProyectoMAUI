@@ -81,20 +81,29 @@ public partial class SPJVendedor : ContentPage
                 Margin = new Thickness(0, 5)
             };
 
-            var datosVendedor = new Label
+            // Datos de Vendedor
+            var datosVendedor = new StackLayout
             {
-                Text = $"Nombre: {registro["Nombre"]}\nCorreo: {registro["Correo"]}\nTeléfono: {registro["Telefono"]}\nDirección: {registro["Direccion"]}",
-                FontSize = 14
+                Padding = 5,
+                BackgroundColor = Colors.LightSkyBlue
             };
+            datosVendedor.Children.Add(new Label { Text = "Datos de Vendedor", FontSize = 16, FontAttributes = FontAttributes.Bold });
+            datosVendedor.Children.Add(new Label { Text = $"Nombre: {registro["Nombre"]}", FontSize = 14 });
+            datosVendedor.Children.Add(new Label { Text = $"Correo: {registro["Correo"]}", FontSize = 14 });
+            datosVendedor.Children.Add(new Label { Text = $"Teléfono: {registro["Telefono"]}", FontSize = 14 });
+            datosVendedor.Children.Add(new Label { Text = $"Dirección: {registro["Direccion"]}", FontSize = 14 });
 
-            var datosVehiculo = new Label
+            // Datos del Vehículo
+            var datosVehiculo = new StackLayout
             {
-                Text = $"Modelo: {registro["Modelo"]}\nMarca: {registro["Marca"]}\nAño: {registro["Año"]}\nPrecio: ${registro["Precio"]}",
-                FontSize = 14
+                Padding = 5,
+                BackgroundColor = Colors.LightGreen
             };
-
-            stack.Children.Add(datosVendedor);
-            stack.Children.Add(datosVehiculo);
+            datosVehiculo.Children.Add(new Label { Text = "Datos de Vehículo", FontSize = 16, FontAttributes = FontAttributes.Bold });
+            datosVehiculo.Children.Add(new Label { Text = $"Modelo: {registro["Modelo"]}", FontSize = 14 });
+            datosVehiculo.Children.Add(new Label { Text = $"Marca: {registro["Marca"]}", FontSize = 14 });
+            datosVehiculo.Children.Add(new Label { Text = $"Año: {registro["Año"]}", FontSize = 14 });
+            datosVehiculo.Children.Add(new Label { Text = $"Precio: ${registro["Precio"]}", FontSize = 14 });
 
             // Si hay una ruta de imagen válida, agregar la imagen
             if (!string.IsNullOrWhiteSpace(registro["Imagen"]))
@@ -106,8 +115,18 @@ public partial class SPJVendedor : ContentPage
                     Aspect = Aspect.AspectFit
                 };
 
-                stack.Children.Add(imagenVehiculo);
+                var imagenStack = new StackLayout
+                {
+                    Padding = 5,
+                    BackgroundColor = Colors.LightYellow
+                };
+                imagenStack.Children.Add(new Label { Text = "Imagen", FontSize = 16, FontAttributes = FontAttributes.Bold });
+                imagenStack.Children.Add(imagenVehiculo);
+                stack.Children.Add(imagenStack);
             }
+
+            stack.Children.Add(datosVendedor);
+            stack.Children.Add(datosVehiculo);
 
             // Botón para eliminar el registro individualmente
             var eliminarButton = new Button

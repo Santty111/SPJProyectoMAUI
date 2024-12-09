@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SPJProyectoMAUI.SPJComprador"
+             Title="Catálogo de Vehículos">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <!-- Título del catálogo -->
+            <Label Text="Catálogo de Vehículos" FontSize="Large" HorizontalOptions="Center" />
+
+            <!-- Stack principal donde se mostrarán los vehículos -->
+            <StackLayout x:Name="CatalogoStack" Spacing="5" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
